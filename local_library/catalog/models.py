@@ -1,10 +1,10 @@
 from django.db import models
 
 # Create your models here.
-from django.urls import reverse # Used in get_absolute_url() to get URL for specified ID
-from django.db.models import UniqueConstraint # Constrains fields to unique values
-from django.db.models.functions import Lower # Returns lower cased value of field
-import uuid # Required for unique book instances
+from django.urls import reverse  # Used in get_absolute_url() to get URL for specified ID
+from django.db.models import UniqueConstraint  # Constrains fields to unique values
+from django.db.models.functions import Lower  # Returns lower cased value of field
+import uuid  # Required for unique book instances
 
 
 class Genre(models.Model):
@@ -13,29 +13,23 @@ class Genre(models.Model):
         max_length=200,
         unique=True,
         help_text="Enter a book genre (e.g Science Fiction, French Poetry, etc.)"
-        )
-        
-    
+    )
+
     def __str__(self):
         """String for representing model object."""
         return self.name
-        
-        
+
     def get_absolute_url(self):
         """Returns the url to access a particular genre instance."""
         return reverse('genre-detail', args=[str(self.id)])
-        
-        
+
     class Meta:
         constraints = [
-            UniqueConstraint(
-                Lower('name'),
-                name='genre_name_case_insensitive_unique',
-                violation_error_message="Genre already exists (case insensitive match)"
-            ),
+            UniqueConstraint(Lower('name'), name='genre_name_case_insensitive_unique',
+                             violation_error_message="Genre already exists (case insensitive match)"),
         ]
-        
-  
+
+
 class Language(models.Model):
     """Model representing a Language (e.g. English, French, Japanese, etc.)"""
     name = models.CharField(max_length=200,
@@ -50,15 +44,16 @@ class Language(models.Model):
         """String for representing the Model object (in Admin site etc.)"""
         return self.name
 
-        
+
 class Book(models.Model):
     # Author as a string rather than object because it hasn't been declared yet in file.
     """Model representing a book (but not a specific copy of a book)."""
     title = models.CharField(max_length=200)
-    author = models.ForeignKey('Author',  # Foreign Key used because book can only have one author, but authors can have multiple books.
-                                on_delete=models.RESTRICT,  # Prevent the book's associated author being deleted
-                                null=True)    # Allows the database to store a Null value if no author is selected
-    summary = models.TextField(max_length=1000, 
+    author = models.ForeignKey('Author',
+                               # Foreign Key used because book can only have one author, but authors can have multiple books.
+                               on_delete=models.RESTRICT,  # Prevent the book's associated author being deleted
+                               null=True)  # Allows the database to store a Null value if no author is selected
+    summary = models.TextField(max_length=1000,
                                help_text="Enter a brief description of the book")
     isbn = models.CharField('ISBN', max_length=13,
                             unique=True,
@@ -66,13 +61,18 @@ class Book(models.Model):
                                       '">ISBN number</a>')
 
     # ManyToManyField used because genre can contain many books. Books can cover many genres.
-    # Genre class has already been defined so we can specify the object above.
+    # Genre class has already been defined, so we can specify the object above.
     """The related model class is declared as the first unnamed parameter using either the model class or a string containing the name of the related model. You must use the name of the model as a string if the associated class has not yet been defined in this file before it is referenced!"""
     genre = models.ManyToManyField(
         Genre, help_text="Select a genre for this book")
 
     language = models.ForeignKey('Language', on_delete=models.SET_NULL, null=True)
 
+    def display_genre(self):
+        """Create a string for the Genre. This is required to display genre in Admin."""
+        return ', '.join(genre.name for genre in self.genre.all()[:3])
+
+    display_genre.short_description = 'Genre'
 
     def __str__(self):
         """String for representing the Model object."""
@@ -132,4 +132,3 @@ class Author(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return f'{self.last_name}, {self.first_name}'
-
