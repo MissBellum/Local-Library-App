@@ -2,6 +2,8 @@ from django.contrib import admin
 
 # Register your models here.
 from .models import Author, Genre, Book, BookInstance, Language
+from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
 class AuthorInline(admin.TabularInline):
@@ -30,14 +32,14 @@ class BookAdmin(admin.ModelAdmin):
 
 @admin.register(BookInstance)
 class BookInstanceAdmin(admin.ModelAdmin):
-    list_display = ('book', 'id', 'due_back', 'status')
+    list_display = ('book', 'id', 'borrower', 'due_back', 'status')
     list_filter = ('status', 'due_back')
     fieldsets = (
         (None, {
             'fields': ('book', 'id', 'imprint')
         }),
         ('Availability', {
-            'fields': ('status', 'due_back')
+            'fields': ('status', 'due_back', 'borrower')
         })
     )
    
