@@ -5,16 +5,19 @@
 
 	{% if bookinstance_list %}
 	<p>Yes there are borrowed books my love.</p>
-	
+
 	{% if perms.catalog.can_mark_returned %}
 	<ul>
 	{% for borrow in bookinstance_list %}
 	<li class="{% if borrow.is_overdue %}text-danger{% endif %}">
-	<a href="{% url 'book-detail' borrow.book.pk %}">{{ borrow.book.title }}</a> ({{ borrow.due_back }}) - {{ borrow.borrower }}
+	<a href="{% url 'book-detail' borrow.book.pk %}">{{ borrow.book.title }}</a> 
+	 - {{ borrow.borrower }}
+	 - <a href="{% url 'renew-book-librarian' borrow.id %}">Renew</a>
+
 	</li>
 	{% endfor %}
-	{% endif %}
 	</ul>
+	{% endif %}
 
 	{% else %}
 	  <p>There are no books borrowed.</p>
