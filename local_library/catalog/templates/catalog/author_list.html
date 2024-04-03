@@ -6,15 +6,17 @@
 
 {% block content %}
   <h1>Authors List</h1>
+  
   {% if author_list %}
     <ul>
       {% for author in author_list %}
-      <li>
-        <a href="{{ authors.get_absolute_url }}">{{ author.first_name }}, {{ author.last_name }}</a>
-      </li>
+		<li>
+			<a href="{% url 'authors' %}">
+			{{ author }} ({{ author.date_of_birth }} - {% if author.date_of_death %}{{ author.date_of_death }}{% endif %})</a>
+		</li>
       {% endfor %}
     </ul>
   {% else %}
-    <p>There are no books in the library.</p>
+    <p>There are no authors available.</p>
   {% endif %}
 {% endblock %}
