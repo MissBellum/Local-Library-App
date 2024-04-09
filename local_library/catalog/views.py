@@ -12,6 +12,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from catalog.forms import RenewBookForm
+from django.core.paginator import Paginator
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 import datetime
 
@@ -51,18 +52,25 @@ class BookListView(LoginRequiredMixin, generic.ListView):
 class BookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Book
 
+class AuthorListView(LoginRequiredMixin, generic.ListView):
+    model = Author
+    paginate_by = 5
+    
 class AuthorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Author
 
-@login_required
+"""
 def authorlist(request):
     author_list = Author.objects.all()
     
     context = {
-    'author_list' : author_list,
+        'author_list' : author_list,
+        'paginate' : paginator,
+
     }
     
     return render(request, 'author_list.html', context=context)
+"""
 
 class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
     """Generic class-based view listing books on loan to current user."""
@@ -85,7 +93,6 @@ class BorrowedListView(PermissionRequiredMixin, generic.ListView):
     
     def get_queryset(self):
         all_borrows = BookInstance.objects.filter(status__exact='o').order_by('due_back')
-        print(all_borrows)
         return (all_borrows)
         
 @login_required   
@@ -148,4 +155,26 @@ class AuthorDelete(PermissionRequiredMixin, DeleteView):
             return HttpResponseRedirect(
                 reverse("author-delete", kwargs={"pk": self.object.pk})
             )
+class BookCreate(PermissionRequiredMixin, CreateView):
+    model = Book
+    fields = ['title', 'author', 'summary', 'isbn', 'genre', 'language']
+    permission_required = 'catalog.add_book'
 
+class BookUpdate(PermissionRequiredMixin, UpdateView):
+    model = Book
+    fields = '__all__'
+    permission_required = 'catalog.change_book'
+    
+class BookDelete(PermissionRequiredMixin, DeleteView):
+    model = Book
+    success_url = reverse_lazy('books')
+    permission_required = 'catalog.delete_book'
+    
+    def form_valid(self, form):
+        try:
+            self.object.delete()
+            return HttpResponseRedirect(self.success_url)
+        except Exception as e:
+            return HttpResponseRedirect(
+                reverse("book-delete", kwargs={"pk": self.object.pk})
+                )
