@@ -12,7 +12,8 @@
       {% for author in author_list %}
 		<li>
 			<a href="{% url 'authors' %}">
-			{{ author }} ({{ author.date_of_birth }} - {% if author.date_of_death %}{{ author.date_of_death }}{% endif %})</a>
+			{{ author }}</a>
+			({{ author.date_of_birth }} - {% if author.date_of_death %}{{ author.date_of_death }}{% endif %})
 		</li>
       {% endfor %}
     </ul>
