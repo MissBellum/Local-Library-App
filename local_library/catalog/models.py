@@ -59,7 +59,7 @@ class Book(models.Model):
     author = models.ForeignKey('Author',  # Foreign Key used because book can only have one author, but authors can have multiple books.
                                 on_delete=models.RESTRICT,  # Prevent the book's associated author being deleted
                                 null=True)    # Allows the database to store a Null value if no author is selected
-    summary = models.TextField(max_length=1000, 
+    summary = models.TextField(max_length=300, 
                                help_text="Enter a brief description of the book")
     isbn = models.CharField('ISBN', max_length=13,
                             unique=True,

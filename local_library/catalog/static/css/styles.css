@@ -1,3 +1,102 @@
+/* Base styles */
+body {
+    font-family: 'Roboto', sans-serif; /* Or Lora */
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+.container-fluid {
+    padding-top: 20px;
+}
+
+h1, h2, h3 {
+    color: #4e4e4e;
+	font-family: 'Playfair Display', serif; /* Or Montserrat */
+}
+
+p, a, li {
+    font-family: 'Roboto', sans-serif; /* Or Lora */
+	color: #4e4e4e;
+}
+
+/* Sidebar styles */
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-nav li {
+    margin: 10px 0;
+}
+
+.sidebar-nav li a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: underline;
+}
+
+.sidebar-nav hr {
+    margin: 10px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+.col-sm-2 {
+    background-color: #e9ecef;
+    padding: 15px;
+    min-height: 100vh;
+}
+
+/* Content styles */
+.col-sm-10 {
+    padding: 20px;
+    background-color: #ffffff;
+    border-left: 1px solid #dee2e6;
+}
+
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.page-links {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.page-links a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.page-current {
+    font-weight: bold;
+}
+
+button.btn-link {
+    padding: 0;
+    font-size: inherit;
+    font-weight: bold;
+    color: hsl(354, 70%, 54%);
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    .col-sm-2 {
+        display: none;
+    }
+    
+    .col-sm-10 {
+        border-left: none;
+        padding: 10px;
+    }
+}
+
 .sidebar-nav {
 	margin-top: 20px;
 	padding: 0;
@@ -12,3 +111,56 @@
 	padding: 0;
 	margin: 0;
 }
+
+/* Form container styling */
+.form-container {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #bdbdbd;
+    border: 1px solid #bdbdbd;
+    border-radius: 8px;
+}
+
+/* Input fields */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* Focus effect for input fields */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+    border-color: #4CAF50; /* Same color as button */
+    outline: none;
+}
+
+/* Submit button styling */
+input[type="submit"] {
+    width: 33%;
+	margin-top: 20px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
