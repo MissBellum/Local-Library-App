@@ -14,7 +14,7 @@ h1, h2, h3 {
 	font-family: 'Playfair Display', serif; /* Or Montserrat */
 }
 
-p, a, li {
+p, li {
     font-family: 'Roboto', sans-serif; /* Or Lora */
 	color: #4e4e4e;
 }
@@ -72,6 +72,7 @@ p, a, li {
 .page-links a {
     color: #007bff;
     text-decoration: none;
+	font-family: 'Roboto', sans-serif; /* Or Lora */
 }
 
 .page-current {
@@ -131,7 +132,7 @@ textarea {
     padding: 12px;
     margin: 20px;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid #bdbdbd;
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 14px;
@@ -148,8 +149,8 @@ textarea:focus {
 
 /* Submit button styling */
 input[type="submit"] {
-    width: 33%;
-	margin-top: 20px;
+    width: 120px;
+	margin-top: 10px;
     padding: 10px;
     font-size: 16px;
     border: none;
