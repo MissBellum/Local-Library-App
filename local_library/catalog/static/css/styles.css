@@ -1,12 +1,12 @@
 /* Base styles */
 body {
     font-family: 'Roboto', sans-serif; /* Or Lora */
-    background-color: #f8f9fa;
+    /* background-color: #f8f9fa; */
     color: #343a40;
 }
 
 .container-fluid {
-    padding-top: 20px;
+    /* padding-top: 20px; */
 }
 
 h1, h2, h3 {
@@ -54,7 +54,7 @@ p, li {
 /* Content styles */
 .col-sm-10 {
     padding: 20px;
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     border-left: 1px solid #dee2e6;
 }
 
@@ -165,3 +165,21 @@ input[type="submit"]:hover {
     background-color: #45a049;
 }
 
+/* Utility classes */
+.home {
+    margin: 20px;
+    width: 76vw;
+    height: 85vh;
+    padding: 20px;
+    background-color: rgb(225, 234, 252);
+    border: 2px solid #4e4e4e;
+}
+.heading {
+    margin: 10px 0 15px;
+}
+.dynamic {
+    margin: 25px 0;
+}
+.visits {
+    font-size: smaller;
+}
