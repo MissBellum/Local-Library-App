@@ -5,11 +5,13 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Local Library Home</h1>
-    <p>
+<div class="home">
+  <h1 class="heading">Local Library Home</h1> <hr/>
+    <p class="intro">
 	Welcome to LocalLibrary, a website developed by
 	<em>Chrise the Backend Developer!</em>
 	</p>
+	<div class="dynamic">
 	<h2>Dynamic content</h2>
 	<p>The library has the following record counts:</p>
 		<ul>
@@ -18,10 +20,12 @@
 			<li><strong>Copies available:</strong> {{ num_instances_available }}</li>
 			<li><strong>Authors:</strong> {{ num_authors }}</li>
 			<li><strong>Genres:</strong> {{ num_genres }}</li>
-			<li><strong>'The' books:</strong> {{ num_type }}</li>
+			{% comment %} <li><strong>'The' books:</strong> {{ num_type }}</li> {% endcomment %}
 		</ul>
-	<p>
+	</div>
+	<p class="visits">
 		You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.
 	</p>
+</div>
 {% endblock %}
 
