@@ -171,7 +171,10 @@ input[type="submit"]:hover {
     width: 76vw;
     height: 85vh;
     padding: 20px;
-    background-color: rgb(225, 234, 252);
+    background-color: linear-gradient(135deg, 
+    rgb(225, 234, 252), 
+    rgb(210, 224, 250), 
+    rgb(159, 172, 197));
     border: 2px solid #4e4e4e;
 }
 .heading {
